@@ -1,0 +1,87 @@
+package com.task.patienreg.dao.impl;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.BeanUtils;
+
+import com.task.patienreg.dao.PatientDao;
+import com.task.patienreg.dao.entity.PatientEntity;
+import com.task.patienreg.dto.Patientdto;
+import com.task.patienreg.hibernate.utils.HibernateUtils;
+
+
+
+
+
+public class Patientdaoimpl implements PatientDao{
+	
+	Session session;
+
+	@Override
+	public void openConnection() {
+		// TODO Auto-generated method stub
+		SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+		session= sessionFactory.openSession();
+		
+	}
+
+	@Override
+	public Patientdto getBookingById(long patientId) {
+		// TODO Auto-generated method stub
+		Patientdto patientdto = new Patientdto();
+		
+		CriteriaBuilder crb= session.getCriteriaBuilder();
+		
+		CriteriaQuery<PatientEntity> cquery= crb.createQuery(PatientEntity.class);
+		
+		Root<PatientEntity> root= cquery.from(PatientEntity.class);
+		
+		cquery.select(root);
+		
+		cquery.where(crb.equal(root.get("id"), patientId));
+		
+		Query<PatientEntity> query= session.createQuery(cquery);
+		
+		PatientEntity patientEntity = query.uniqueResult();
+		
+		BeanUtils.copyProperties(patientEntity, patientdto);
+		
+		return patientdto;
+		
+	}
+
+	
+	@Override
+	public void closeConnection() {
+		// TODO Auto-generated method stub
+		if(session!=null)
+			session.close();
+	}
+
+	@Override
+	public Patientdto savePatient(Patientdto patientdto) {
+		// TODO Auto-generated method stub
+		Patientdto savedPatient=null;
+		PatientEntity patientEntity= new PatientEntity();
+		
+		BeanUtils.copyProperties(patientdto, patientEntity);
+		 
+		openConnection();
+		session.beginTransaction();
+		session.save(patientEntity);
+		session.getTransaction().commit();
+		closeConnection();
+		
+		savedPatient= new Patientdto();
+		BeanUtils.copyProperties(patientEntity, savedPatient);
+		
+		return savedPatient;
+	
+	}
+
+}
