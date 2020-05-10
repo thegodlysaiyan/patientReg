@@ -1,6 +1,7 @@
 package com.task.patientreg.resources;
 
-import com.task.patientreg.service.impl.PatientService;
+import com.task.patientreg.service.PatientService;
+import com.task.patientreg.service.impl.PatientServiceImpl;
 import com.task.patienreg.dao.PatientDao;
 import com.task.patienreg.dao.impl.Patientdaoimpl;
 import com.task.patienreg.dto.Patientdto;
@@ -14,7 +15,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
@@ -23,20 +23,22 @@ import jakarta.ws.rs.PathParam;
 @Path("/patient")
 public class PatientRegistration {
 	
-	PatientService patientService = new PatientService();
-	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<RegistrationRequest> getAllPatientInfo() {
-		return patientService.getAllPatients();
+	@Path("/{patientId}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public RegResponse getPatientById(@PathParam("patientId") String patientId) {
+		RegResponse response= new RegResponse();
+		
+		//Rertrieve booking details
+			PatientService patientService= new PatientServiceImpl();
+			Patientdto patientdto = patientService.getPatientByPatientId(patientId);
+		
+		//prepare response
+			BeanUtils.copyProperties(patientdto, response);
+		return response;
 	}
 	
-	@GET
-	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public RegistrationRequest getSinglePatientInfo(@PathParam("id") int id) {
-		return patientService.getPatient(id);
-	}
+
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

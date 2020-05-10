@@ -6,7 +6,7 @@ public interface PatientDao {
 	
 public void openConnection();
 	
-	public Patientdto getBookingById(long patientId);
+	public Patientdto getPatientById(String patientId);
 	
 	
 	

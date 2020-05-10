@@ -31,9 +31,11 @@ public class Patientdaoimpl implements PatientDao{
 	}
 
 	@Override
-	public Patientdto getBookingById(long patientId) {
+	public Patientdto getPatientById(String patientId) {
 		// TODO Auto-generated method stub
 		Patientdto patientdto = new Patientdto();
+		
+		long patId = Long.parseLong(patientId);
 		
 		CriteriaBuilder crb= session.getCriteriaBuilder();
 		
@@ -43,7 +45,7 @@ public class Patientdaoimpl implements PatientDao{
 		
 		cquery.select(root);
 		
-		cquery.where(crb.equal(root.get("id"), patientId));
+		cquery.where(crb.equal(root.get("id"), patId));
 		
 		Query<PatientEntity> query= session.createQuery(cquery);
 		
