@@ -1,6 +1,6 @@
 package com.task.patientreg.service;
 
-import com.task.patienreg.dto.Patientdto;
+import com.task.patientreg.dto.Patientdto;
 
 
 public interface PatientService {

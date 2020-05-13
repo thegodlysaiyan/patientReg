@@ -1,4 +1,4 @@
-package com.task.patienreg.dto;
+package com.task.patientreg.dto;
 
 public class Patientdto {
 	private long id;

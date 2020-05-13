@@ -2,9 +2,9 @@ package com.task.patientreg.resources;
 
 import com.task.patientreg.service.PatientService;
 import com.task.patientreg.service.impl.PatientServiceImpl;
-import com.task.patienreg.dao.PatientDao;
-import com.task.patienreg.dao.impl.Patientdaoimpl;
-import com.task.patienreg.dto.Patientdto;
+import com.task.patientreg.dao.PatientDao;
+import com.task.patientreg.dao.impl.Patientdaoimpl;
+import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.model.request.RegistrationRequest;
 import com.task.patientreg.model.response.RegResponse;
 

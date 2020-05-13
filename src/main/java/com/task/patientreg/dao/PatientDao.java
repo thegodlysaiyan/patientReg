@@ -1,6 +1,6 @@
-package com.task.patienreg.dao;
+package com.task.patientreg.dao;
 
-import com.task.patienreg.dto.Patientdto;
+import com.task.patientreg.dto.Patientdto;
 
 public interface PatientDao {
 	

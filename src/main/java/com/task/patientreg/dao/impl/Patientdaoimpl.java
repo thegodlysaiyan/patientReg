@@ -1,4 +1,4 @@
-package com.task.patienreg.dao.impl;
+package com.task.patientreg.dao.impl;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,10 +9,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 
-import com.task.patienreg.dao.PatientDao;
 import com.task.patienreg.dao.entity.PatientEntity;
-import com.task.patienreg.dto.Patientdto;
-import com.task.patienreg.hibernate.utils.HibernateUtils;
+import com.task.patientreg.dao.PatientDao;
+import com.task.patientreg.dto.Patientdto;
+import com.task.patientreg.hibernate.utils.HibernateUtils;
 
 
 

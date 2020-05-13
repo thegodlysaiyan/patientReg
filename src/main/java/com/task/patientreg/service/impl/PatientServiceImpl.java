@@ -4,10 +4,10 @@ package com.task.patientreg.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.task.patienreg.dao.PatientDao;
-import com.task.patienreg.dao.impl.Patientdaoimpl;
-import com.task.patienreg.dto.Patientdto;
+import com.task.patientreg.dao.PatientDao;
+import com.task.patientreg.dao.impl.Patientdaoimpl;
 import com.task.patientreg.database.DatabaseClass;
+import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.model.request.RegistrationRequest;
 import com.task.patientreg.service.PatientService;
 

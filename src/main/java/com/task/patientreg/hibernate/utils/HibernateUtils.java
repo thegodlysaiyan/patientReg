@@ -1,4 +1,4 @@
-package com.task.patienreg.hibernate.utils;
+package com.task.patientreg.hibernate.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
