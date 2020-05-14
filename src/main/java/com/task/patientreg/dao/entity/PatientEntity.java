@@ -1,4 +1,4 @@
-package com.task.patienreg.dao.entity;
+package com.task.patientreg.dao.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

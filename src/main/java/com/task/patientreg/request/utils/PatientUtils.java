@@ -8,7 +8,7 @@ import com.task.patientreg.model.response.ErrorMessages;
 
 public class PatientUtils {
 
-	public void validatePatientRequest(Patientdto patientdto) {
+	public void validatePatientRequest(Patientdto patientdto) throws InvalidRequestException{
 		// TODO Auto-generated method stub
 		if(patientdto.getHeight()==null || patientdto.getHeight().isEmpty() ||
 				patientdto.getWeight()==null || patientdto.getWeight().isEmpty() ||

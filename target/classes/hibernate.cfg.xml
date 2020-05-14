@@ -51,7 +51,7 @@ Contributor(s):
         <property name="show_sql">true</property> 
         <property name="hibernate.hbm2ddl.auto">update</property>
         
-        <mapping class="com.task.patienreg.dao.entity.PatientEntity"></mapping>
+        <mapping class="com.task.patientreg.dao.entity.PatientEntity"></mapping>
         
     </session-factory>
 </hibernate-configuration>

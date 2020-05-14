@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 
-import com.task.patienreg.dao.entity.PatientEntity;
 import com.task.patientreg.dao.PatientDao;
+import com.task.patientreg.dao.entity.PatientEntity;
 import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.hibernate.utils.HibernateUtils;
 

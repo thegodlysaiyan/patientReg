@@ -18,8 +18,8 @@ import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.task.patienreg.dao.entity.PatientEntity;
 import com.task.patientreg.dao.PatientDao;
+import com.task.patientreg.dao.entity.PatientEntity;
 import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.model.response.RegResponse;
 
