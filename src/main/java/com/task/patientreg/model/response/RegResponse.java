@@ -12,7 +12,24 @@ public class RegResponse {
 	private String blood_pressure;
 	private String bmi;
 	private String heart_rate;
+	private String href;
 	
+	public RegResponse() {
+		
+	}
+	
+	public RegResponse(long id, String height, String weight, String temperature, String blood_pressure, String bmi,
+			String heart_rate, String href) {
+		super();
+		this.id = id;
+		this.height = height;
+		this.weight = weight;
+		this.temperature = temperature;
+		this.blood_pressure = blood_pressure;
+		this.bmi = bmi;
+		this.heart_rate = heart_rate;
+		this.href = href;
+	}
 	public long getId() {
 		return id;
 	}
@@ -54,6 +71,12 @@ public class RegResponse {
 	}
 	public void setHeart_rate(String heart_rate) {
 		this.heart_rate = heart_rate;
+	}
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
 	}
 
 	

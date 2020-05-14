@@ -14,9 +14,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.task.patienreg.dao.entity.PatientEntity;
 import com.task.patientreg.dao.PatientDao;
 import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.model.response.RegResponse;
@@ -33,88 +35,39 @@ public class Patientdaoimpltest {
 		
 		Patientdto patient= new Patientdto();
 		patient.setHeight("6ft 3inch");
-		Mockito.when(impl.getPatientById("irz9wYHR")).thenReturn(patient);
+		Mockito.when(impl.getPatientById("5")).thenReturn(patient);
 		
-		String actual= impl.getPatientById("irz9wYHR").getHeight();
+		String actual= impl.getPatientById("5").getHeight();
 		assertEquals("6ft 3inch", actual);		
 	}
 	
-	
 	@Test
-	public void testforGET() throws IOException {
-		URL url = new URL("http://localhost:8081/patientreg/webapi/patient/3" );
-		String response= new String();
-		HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
-		//urlConnect.setRequestProperty("Authorization","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJtZWRib29raW5nLmFwaSIsImlhdCI6MTU4OTI3MjM5Miwic3ViIjoiYXBwdXNlciIsInJvbGVzIjoidXNlciIsImlzcyI6Im1lZGJvb2tpbmciLCJleHAiOjE1ODkyNzU5OTJ9.JUWvJnuzzEHt2-Xqj2SHwHKOYNz_pdtBthl3uoBUrgA");
-		urlConnect.setRequestProperty("Accept", "application/json");
+	public void getPatientByIdNegativeFlowTest() {
 		
-		InputStream is = urlConnect.getInputStream();
+		Patientdto patient=new Patientdto();
 		
-		int i = 0;
-		while((i =  is.read()) != -1 ) {
-			response=response+(char)i;
-			System.out.print((char)i);
-		}
+		Mockito.when(impl.getPatientById("15")).thenReturn(patient);
 		
-		try {
-	        ObjectMapper mapper = new ObjectMapper();
-	        mapper.configure(Feature.AUTO_CLOSE_SOURCE, true);
-	        RegResponse jsonMap = mapper.readValue(response, RegResponse.class);
-
-	        System.out.println(jsonMap.getId());
-	       assertEquals(3, jsonMap.getId());
-	    } finally {
-	        is.close();
-	    }
-		
+		String actual= impl.getPatientById("15").getHeight();
+		assertEquals(null, actual);		
 	}
 	
 	@Test
-	public void  testforPOST() throws IOException {
-		URL url = new URL("http://localhost:8081/patientreg/webapi/patient" );
-		String response= new String();
-		HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
-		urlConnect.setRequestMethod("POST");
-		//urlConnect.setRequestProperty("Authorization","eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJtZWRib29raW5nLmFwaSIsImlhdCI6MTU4OTI3MjM5Miwic3ViIjoiYXBwdXNlciIsInJvbGVzIjoidXNlciIsImlzcyI6Im1lZGJvb2tpbmciLCJleHAiOjE1ODkyNzU5OTJ9.JUWvJnuzzEHt2-Xqj2SHwHKOYNz_pdtBthl3uoBUrgA");
-		urlConnect.setRequestProperty("Content-Type", "application/json");
-		urlConnect.setRequestProperty("Accept", "application/json");
-		urlConnect.setDoOutput(true);
+	public void savePatientHappyFlowTest() {
 		
-		String jsonInputString = "{\r\n" + 
-				"	\r\n" + 
-				"	\"height\":\"5ft 9inch\",\r\n" + 
-				"	\"weight\":\"65Kg\",\r\n" + 
-				"	\"temperature\":\"80C\",\r\n" + 
-				"	\"blood_pressure\":\"175/125\",\r\n" + 
-				"	\"bmi\":\"44.6\",\r\n" + 
-				"	\"heart_rate\":\"75\"\r\n" + 
-				"	\r\n" + 
-				"}\r\n";
+		Patientdto patient=new Patientdto();
+		PatientEntity patientEntity=new PatientEntity();
+		Patientdto savedPatient = new Patientdto();
+		BeanUtils.copyProperties(patient, patientEntity);
+		BeanUtils.copyProperties(patientEntity, savedPatient);
 		
-		try(OutputStream os = urlConnect.getOutputStream()) {
-		    byte[] input = jsonInputString.getBytes("utf-8");
-		    os.write(input, 0, input.length);           
-		}
+		Mockito.when(impl.savePatient(patient)).thenReturn(savedPatient);
 		
-		InputStream is = urlConnect.getInputStream();
-		
-		int i = 0;
-		while((i =  is.read()) != -1 ) {
-			response=response+(char)i;
-			System.out.print((char)i);
-		}
-		
-		try {
-	        ObjectMapper mapper = new ObjectMapper();
-	        mapper.configure(Feature.AUTO_CLOSE_SOURCE, true);
-	        RegResponse jsonMap = mapper.readValue(response, RegResponse.class);
-
-	        System.out.println(jsonMap.getId());
-	       assertEquals("65Kg", jsonMap.getWeight());
-	    } finally {
-	        is.close();
-	    }
-		
+		Patientdto actual= impl.savePatient(patient);
+		assertEquals(savedPatient, actual);		
 	}
+	
+	
+	
 
 }

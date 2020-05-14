@@ -29,11 +29,10 @@ public class PatientRegistration {
 	public RegResponse getPatientById(@PathParam("patientId") String patientId) {
 		RegResponse response= new RegResponse();
 		
-		//Rertrieve booking details
+		
 			PatientService patientService= new PatientServiceImpl();
 			Patientdto patientdto = patientService.getPatientByPatientId(patientId);
 		
-		//prepare response
 			BeanUtils.copyProperties(patientdto, response);
 		return response;
 	}
@@ -46,21 +45,19 @@ public class PatientRegistration {
 	public RegResponse addPatientInfo(RegistrationRequest request) {
 		
 		RegResponse response = new RegResponse();
-		//prepare bookingdto
+		
 				Patientdto patientdto = new Patientdto();
-				BeanUtils.copyProperties(request, patientdto);
+				BeanUtils.copyProperties(request, patientdto);				
 				
-				//create booking
-				PatientDao patientdao= new Patientdaoimpl();
-				Patientdto createdpatientdto = patientdao.savePatient(patientdto);
-				
-				//prepare response
+				PatientService patientService= new PatientServiceImpl();
+				Patientdto createdpatientdto = patientService.createPatient(patientdto);
+							
 				BeanUtils.copyProperties(createdpatientdto, response);
 		
 		
 		return response;
 		
-		//return patientService.addPatient(request);
+		
 	}
 
 
