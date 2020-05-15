@@ -15,9 +15,6 @@ import com.task.patientreg.dto.Patientdto;
 import com.task.patientreg.hibernate.utils.HibernateUtils;
 
 
-
-
-
 public class Patientdaoimpl implements PatientDao{
 	
 	Session session;
@@ -34,7 +31,7 @@ public class Patientdaoimpl implements PatientDao{
 	public Patientdto getPatientById(String patientId) {
 		//test jenkins auto build
 		// TODO Auto-generated method stub
-		Patientdto patientdto = new Patientdto();
+		Patientdto patientdto = null;
 		
 		long patId = Long.parseLong(patientId);
 		
@@ -52,7 +49,10 @@ public class Patientdaoimpl implements PatientDao{
 		
 		PatientEntity patientEntity = query.uniqueResult();
 		
-		BeanUtils.copyProperties(patientEntity, patientdto);
+		if(patientEntity!=null) {
+			patientdto = new Patientdto();
+			BeanUtils.copyProperties(patientEntity, patientdto);
+		}
 		
 		return patientdto;
 		

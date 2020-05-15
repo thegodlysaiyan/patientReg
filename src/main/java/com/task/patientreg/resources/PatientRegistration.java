@@ -2,6 +2,8 @@ package com.task.patientreg.resources;
 
 import com.task.patientreg.service.PatientService;
 import com.task.patientreg.service.impl.PatientServiceImpl;
+
+
 import com.task.patientreg.dao.PatientDao;
 import com.task.patientreg.dao.impl.Patientdaoimpl;
 import com.task.patientreg.dto.Patientdto;
@@ -17,11 +19,15 @@ import jakarta.ws.rs.core.MediaType;
 
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.ws.rs.PathParam;
 
 @Path("/patient")
 public class PatientRegistration {
+	
+	@Autowired
+	PatientService patientService;
 	
 	@GET
 	@Path("/{patientId}")
@@ -30,7 +36,7 @@ public class PatientRegistration {
 		RegResponse response= new RegResponse();
 		
 		
-			PatientService patientService= new PatientServiceImpl();
+			//PatientService patientService= new PatientServiceImpl();
 			Patientdto patientdto = patientService.getPatientByPatientId(patientId);
 		
 			BeanUtils.copyProperties(patientdto, response);
@@ -49,7 +55,7 @@ public class PatientRegistration {
 				Patientdto patientdto = new Patientdto();
 				BeanUtils.copyProperties(request, patientdto);				
 				
-				PatientService patientService= new PatientServiceImpl();
+				//PatientService patientService= new PatientServiceImpl();
 				Patientdto createdpatientdto = patientService.createPatient(patientdto);
 							
 				BeanUtils.copyProperties(createdpatientdto, response);
