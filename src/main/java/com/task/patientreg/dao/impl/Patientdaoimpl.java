@@ -74,11 +74,11 @@ public class Patientdaoimpl implements PatientDao{
 		
 		BeanUtils.copyProperties(patientdto, patientEntity);
 		 
-		openConnection();
+		
 		session.beginTransaction();
 		session.save(patientEntity);
 		session.getTransaction().commit();
-		closeConnection();
+		
 		
 		savedPatient= new Patientdto();
 		BeanUtils.copyProperties(patientEntity, savedPatient);
